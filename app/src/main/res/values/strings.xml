@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">MindFit</string>
+    <string name="login">INICIAR SESIÓN</string>
+    <string name="register">REGISTRARSE</string>
+    <string name="reservas">Reservas</string>
+    <string name="qr">QR</string>
+    <string name="historial">Historial</string>
+</resources>
