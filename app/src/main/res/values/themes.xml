@@ -1,14 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Tema base para la aplicación -->
-    <style name="Theme.MindFit" parent="Theme.Material3.DayNight.NoActionBar">
-        <item name="colorPrimary">@color/purple_500</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
-        <item name="colorOnPrimary">@color/white</item>
+    <!-- Tema principal -->
+    <style name="Theme.MindFit" parent="Theme.Material3.DayNight">
+        <item name="colorPrimary">@color/mindfit_primary</item>
+        <item name="colorPrimaryVariant">@color/mindfit_primary_dark</item>
+        <item name="colorOnPrimary">@color/mindfit_text_light</item>
+        <item name="colorSecondary">@color/mindfit_secondary</item>
+        <item name="colorOnSecondary">@color/mindfit_text_light</item>
+        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+        <item name="android:windowLightStatusBar">false</item>
     </style>
 
-    <!-- Tema específico para SplashActivity -->
+    <!-- Tema para Splash -->
     <style name="SplashTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowBackground">@drawable/splash_background</item>
+        <item name="android:statusBarColor">@color/mindfit_primary</item>
     </style>
 </resources>

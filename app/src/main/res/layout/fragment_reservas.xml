@@ -1,14 +1,25 @@
-<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/mindfit_bg_light"
     android:orientation="vertical"
     android:padding="16dp">
 
-    <TextView
+    <Button
+        android:id="@+id/btnPsicologia"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Pantalla de Reservas"
-        android:textSize="24sp"/>
+        android:text="Psicología"
+        android:backgroundTint="@color/mindfit_primary"
+        android:textColor="@color/mindfit_text_light"
+        android:layout_marginBottom="16dp"/>
+
+    <Button
+        android:id="@+id/btnCultura"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Cultura"
+        android:backgroundTint="@color/mindfit_secondary"
+        android:textColor="@color/mindfit_text_light"/>
 </LinearLayout>
