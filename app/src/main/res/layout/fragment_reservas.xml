@@ -5,21 +5,21 @@
     android:background="@color/mindfit_bg_light"
     android:orientation="vertical"
     android:padding="16dp">
-
+    
     <Button
         android:id="@+id/btnPsicologia"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Psicología"
+        android:layout_marginBottom="16dp"
         android:backgroundTint="@color/mindfit_primary"
-        android:textColor="@color/mindfit_text_light"
-        android:layout_marginBottom="16dp"/>
+        android:text="Psicología"
+        android:textColor="@color/mindfit_text_light" />
 
     <Button
         android:id="@+id/btnCultura"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Cultura"
         android:backgroundTint="@color/mindfit_secondary"
-        android:textColor="@color/mindfit_text_light"/>
+        android:text="Cultura"
+        android:textColor="@color/mindfit_text_light" />
 </LinearLayout>
