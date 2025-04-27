@@ -29,5 +29,11 @@
             android:name=".activities.MainActivity"
             android:exported="false" />
 
+        <!-- RegisterActivity -->
+        <activity
+            android:name=".activities.RegisterActivity"
+            android:exported="false"
+            android:theme="@style/Theme.MindFit"/>
+
     </application>
 </manifest>

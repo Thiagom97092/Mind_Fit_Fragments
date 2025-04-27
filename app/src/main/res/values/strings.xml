@@ -5,4 +5,11 @@
     <string name="reservas">Reservas</string>
     <string name="qr">QR</string>
     <string name="historial">Historial</string>
+    <string name="register_title">Crear Cuenta</string>
+    <string name="email_hint">Email</string>
+    <string name="password_hint">Contraseña</string>
+    <string name="confirm_password_hint">Confirmar Contraseña</string>
+    <string name="register_button">REGISTRARSE</string>
+    <string name="already_have_account">¿Ya tienes cuenta? Inicia sesión</string>
+    <string name="skip_for_now">Saltar por ahora</string>
 </resources>
