@@ -1,18 +1,23 @@
 package com.example.mindfit.activities
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.example.mindfit.databinding.ActivityRegisterBinding
+import com.example.mindfit.data.repository.UserRepository
 
 class RegisterActivity : AppCompatActivity() {
+
     private lateinit var binding: ActivityRegisterBinding
+    private lateinit var userRepository: UserRepository
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        userRepository = UserRepository.getInstance(applicationContext)
 
         setupUI()
     }
@@ -54,9 +59,15 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private fun registerUser() {
-        // Aquí iría la lógica de registro con Firebase/API
-        Toast.makeText(this, "Registro exitoso", Toast.LENGTH_SHORT).show()
-        navigateToMain()
+        val email = binding.etEmail.text.toString().trim()
+        val password = binding.etPassword.text.toString().trim()
+
+        if (userRepository.registerUser(email, password)) {
+            Toast.makeText(this, "Registro exitoso", Toast.LENGTH_SHORT).show()
+            navigateToMain()
+        } else {
+            Toast.makeText(this, "Error: El usuario ya existe", Toast.LENGTH_LONG).show()
+        }
     }
 
     private fun navigateToMain() {

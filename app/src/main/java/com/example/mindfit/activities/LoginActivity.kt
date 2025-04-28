@@ -2,66 +2,84 @@ package com.example.mindfit.activities
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Button
-import android.widget.EditText
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.mindfit.R
 import com.example.mindfit.databinding.ActivityLoginBinding
+import com.example.mindfit.data.repository.UserRepository
 
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginBinding
-    private lateinit var etEmail: EditText
-    private lateinit var etPassword: EditText
-    private lateinit var btnLogin: Button
-    private lateinit var btnForgotPassword: Button
+    private lateinit var userRepository: UserRepository
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Inicializar vistas
-        etEmail = binding.etEmail
-        etPassword = binding.etPassword
-        btnLogin = binding.btnLogin
-        btnForgotPassword = binding.btnForgotPassword
+        userRepository = UserRepository.getInstance(applicationContext)
 
-        // Listeners
-        btnLogin.setOnClickListener {
-            val email = etEmail.text.toString().trim()
-            val password = etPassword.text.toString().trim()
+        setupLoginButton()
+        setupRegisterLink()
+    }
 
-            if (validateInputs(email, password)) {
-                // Simular login exitoso
-                saveLoginState(true)
-                startActivity(Intent(this, MainActivity::class.java))
-                finish()
+    private fun setupLoginButton() {
+        binding.btnLogin.setOnClickListener {
+            val email = binding.etEmail.text.toString().trim()
+            val password = binding.etPassword.text.toString().trim()
+
+            when {
+                email.isEmpty() -> showEmailError()
+                password.isEmpty() -> showPasswordError()
+                !userRepository.userExists(email) -> showUserNotRegistered()
+                !userRepository.loginUser(email, password) -> showInvalidCredentials()
+                else -> navigateToMainActivity()
             }
-        }
-
-        btnForgotPassword.setOnClickListener {
-            Toast.makeText(this, "Funcionalidad en desarrollo", Toast.LENGTH_SHORT).show()
         }
     }
 
-    private fun validateInputs(email: String, password: String): Boolean {
-        return when {
-            email.isEmpty() -> {
-                etEmail.error = "Ingrese su correo"
-                false
-            }
-            password.isEmpty() -> {
-                etPassword.error = "Ingrese su contraseña"
-                false
-            }
-            else -> true
+    private fun setupRegisterLink() {
+        // Cambia tvRegisterLink por el ID correcto de tu layout
+        binding.tvRegisterLink.setOnClickListener {
+            startActivity(Intent(this, RegisterActivity::class.java))
         }
     }
 
-    private fun saveLoginState(isLoggedIn: Boolean) {
-        val sharedPref = getSharedPreferences("MindFitPrefs", MODE_PRIVATE)
-        sharedPref.edit().putBoolean("isLoggedIn", isLoggedIn).apply()
+    private fun showEmailError() {
+        binding.etEmail.error = "Email requerido"
+        binding.etEmail.requestFocus()
+    }
+
+    private fun showPasswordError() {
+        binding.etPassword.error = "Contraseña requerida"
+        binding.etPassword.requestFocus()
+    }
+
+    private fun showUserNotRegistered() {
+        Toast.makeText(
+            this,
+            "Correo no registrado. Por favor regístrate",
+
+            Toast.LENGTH_LONG
+        ).show()
+    }
+
+    private fun showInvalidCredentials() {
+        Toast.makeText(
+            this,
+            "Contraseña incorrecta",
+            Toast.LENGTH_SHORT
+        ).show()
+        binding.etPassword.requestFocus()
+    }
+
+    private fun navigateToMainActivity() {
+        val resulado =
+        Toast.makeText(this, "Inicio de sesión exitoso", Toast.LENGTH_SHORT).show()
+        startActivity(Intent(this, MainActivity::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        })
+        finish()
     }
 }
